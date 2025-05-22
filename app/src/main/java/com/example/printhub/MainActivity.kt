@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import androidx.activity.viewModels
+import com.example.printhub.DeviceViewModel
 
 class MainActivity : AppCompatActivity() {
 
