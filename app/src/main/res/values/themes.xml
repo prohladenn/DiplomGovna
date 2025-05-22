@@ -7,6 +7,8 @@
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
 
+    <style name="Theme.Printhub" parent="Base.Theme.MyApplication" />
+
     <style name="BottomNavTextBold" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">monospace</item>
