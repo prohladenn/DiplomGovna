@@ -31,7 +31,8 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="96dp"
         app:srcCompat="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/green_accent" />
+        app:backgroundTint="@color/green_accent"
+        android:elevation="0dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
