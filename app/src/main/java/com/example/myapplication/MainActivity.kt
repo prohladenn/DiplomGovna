@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.fab.setOnClickListener { view ->
+        binding.add.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+                .setAnchorView(R.id.add).show()
         }
     }
 

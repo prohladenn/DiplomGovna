@@ -24,13 +24,13 @@
 
     <!-- Новый FloatingActionButton без тени -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottom_navigation"
         app:layout_anchorGravity="top|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="96dp"
+        android:layout_marginEnd="@dimen/add_margin"
+        android:layout_marginBottom="108dp"
         app:srcCompat="@android:drawable/ic_input_add"
         app:backgroundTint="@color/green_accent"
         android:elevation="0dp"
