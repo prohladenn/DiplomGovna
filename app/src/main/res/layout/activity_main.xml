@@ -25,9 +25,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        app:layout_anchor="@id/bottom_navigation"
+        app:layout_anchorGravity="top|end"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="16dp"
         app:srcCompat="@android:drawable/ic_input_add"
         app:backgroundTint="@color/green_accent" />
 
