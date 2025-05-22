@@ -18,7 +18,7 @@
             android:hint="Поиск по серийному номеру"
             android:inputType="text"
             android:backgroundTint="@color/green_accent"
-            android:textColorHint="@color/white"
+            android:textColorHint="#66000000"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
