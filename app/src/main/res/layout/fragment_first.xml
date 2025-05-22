@@ -15,7 +15,7 @@
             android:id="@+id/search_edit_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Поиск принтера"
+            android:hint="Поиск по серийному номеру"
             android:inputType="text"
             style="@style/Widget.SearchEditText.Colored"
             app:layout_constraintTop_toTopOf="parent"

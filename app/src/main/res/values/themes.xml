@@ -12,7 +12,7 @@
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/white</item>
     </style>
-    <style name="Widget.SearchEditText.Colored" parent="Widget.Material3.TextInputEditText">
+    <style name="Widget.SearchEditText.Colored">
         <item name="android:backgroundTint">@color/green_accent</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textColor">@color/black</item>
