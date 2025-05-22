@@ -1,12 +1,12 @@
 package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.myapplication.databinding.ActivityMainBinding
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +22,13 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
+                    val navController = findNavController(R.id.nav_host_fragment_content_main)
+                    navController.navigate(R.id.SecondFragment)
+                    true
+                }
+                R.id.navigation_list -> {
+                    val navController = findNavController(R.id.nav_host_fragment_content_main)
+                    navController.navigate(R.id.FirstFragment)
                     true
                 }
                 else -> false
