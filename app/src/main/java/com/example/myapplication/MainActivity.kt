@@ -46,6 +46,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.SecondFragment -> binding.add.hide()
+                R.id.FirstFragment -> binding.add.show()
+                else -> binding.add.show()
+            }
+        }
+
         binding.add.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
