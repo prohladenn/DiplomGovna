@@ -12,25 +12,12 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green_accent"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/first_fragment_label"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:padding="12dp" />
-        </LinearLayout>
-
+            android:layout_height="?attr/actionBarSize">
+            <!-- Заголовок будет подставляться программно -->
+        </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
