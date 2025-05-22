@@ -19,16 +19,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bottomNav = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        toolbar.title = getString(R.string.first_fragment_label)
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_profile -> {
                     val navController = findNavController(R.id.nav_host_fragment_content_main)
                     navController.navigate(R.id.SecondFragment)
+                    toolbar.title = getString(R.string.second_fragment_label)
                     true
                 }
                 R.id.navigation_list -> {
                     val navController = findNavController(R.id.nav_host_fragment_content_main)
                     navController.navigate(R.id.FirstFragment)
+                    toolbar.title = getString(R.string.first_fragment_label)
                     true
                 }
                 else -> false
