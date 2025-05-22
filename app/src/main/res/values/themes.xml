@@ -7,6 +7,10 @@
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
 
+    <style name="BottomNavTextBold" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
     <style name="Widget.BottomNavigationView.Colored" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/green_accent</item>
         <item name="itemIconTint">@color/green_accent</item>
@@ -16,7 +20,7 @@
         <item name="android:paddingBottom">0dp</item>
         <item name="itemActiveIndicatorStyle">@null</item>
         <item name="android:textSize">16.8sp</item>
-        <item name="itemTextAppearanceActive">@android:style/TextAppearance.Material.Body1</item>
-        <item name="itemTextAppearanceInactive">@android:style/TextAppearance.Material.Body1</item>
+        <item name="itemTextAppearanceActive">@style/BottomNavTextBold</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavTextBold</item>
     </style>
 </resources>
