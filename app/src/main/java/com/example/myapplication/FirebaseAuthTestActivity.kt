@@ -1,3 +1,0 @@
-package com.example.printhub
-
-// ...existing code...
