@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.printhub.Device
 
 class DeviceAdapter(private val devices: MutableList<Device>) : RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
     class DeviceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
