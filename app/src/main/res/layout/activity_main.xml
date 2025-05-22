@@ -12,12 +12,12 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
+            android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:titleTextColor="@color/green_accent" />
-
+            android:layout_height="?attr/actionBarSize">
+            <!-- Заголовок будет подставляться программно -->
+        </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
