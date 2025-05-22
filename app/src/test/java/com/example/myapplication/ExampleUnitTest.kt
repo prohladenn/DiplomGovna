@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.printhub
 
 import org.junit.Test
 
