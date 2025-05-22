@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var toolbar: com.google.android.material.appbar.MaterialToolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,22 +18,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        toolbar = findViewById(R.id.toolbar_title)
         val bottomNav = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
-        toolbar.title = getString(R.string.first_fragment_label)
-
+        // toolbar удалён, возврат к прежней логике
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_profile -> {
                     val navController = findNavController(R.id.nav_host_fragment_content_main)
                     navController.navigate(R.id.SecondFragment)
-                    toolbar.title = getString(R.string.second_fragment_label)
                     true
                 }
                 R.id.navigation_list -> {
                     val navController = findNavController(R.id.nav_host_fragment_content_main)
                     navController.navigate(R.id.FirstFragment)
-                    toolbar.title = getString(R.string.first_fragment_label)
                     true
                 }
                 else -> false
