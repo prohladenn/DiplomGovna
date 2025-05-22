@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.printhub.databinding.FragmentFirstBinding
 import com.example.printhub.DeviceAdapter
 import com.example.printhub.DeviceViewModel
-import com.example.printhub.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
 
