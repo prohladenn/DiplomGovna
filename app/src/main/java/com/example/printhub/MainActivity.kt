@@ -13,13 +13,12 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import com.example.printhub.DeviceViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val deviceViewModel: DeviceViewModel by activityViewModels()
+    private val deviceViewModel: DeviceViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
