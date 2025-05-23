@@ -12,18 +12,20 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.example.printhub.DeviceViewModel
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val deviceViewModel: DeviceViewModel by viewModels()
+    private lateinit var deviceViewModel: DeviceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        deviceViewModel = ViewModelProvider(this)[DeviceViewModel::class.java]
 
         // Динамически добавляем заголовок
         val headerContainer = findViewById<FrameLayout>(R.id.header_container)
