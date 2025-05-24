@@ -5,19 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.printhub.databinding.FragmentFirstBinding
-import com.example.printhub.DeviceAdapter
-import com.example.printhub.DeviceViewModel
 
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
-    private val deviceViewModel: DeviceViewModel by activityViewModels()
-    private lateinit var adapter: DeviceAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,13 +22,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = DeviceAdapter(mutableListOf())
-        binding.printerList.layoutManager = LinearLayoutManager(requireContext())
-        binding.printerList.adapter = adapter
-
-        deviceViewModel.devices.observe(viewLifecycleOwner) { devices ->
-            adapter.setDevices(devices)
-        }
     }
 
     override fun onDestroyView() {

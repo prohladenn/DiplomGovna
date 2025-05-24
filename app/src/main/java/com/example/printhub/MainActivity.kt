@@ -17,15 +17,12 @@ import androidx.lifecycle.ViewModelProvider
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var deviceViewModel: DeviceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        deviceViewModel = ViewModelProvider(this)[DeviceViewModel::class.java]
 
         // Динамически добавляем заголовок
         val headerContainer = findViewById<FrameLayout>(R.id.header_container)
@@ -60,11 +57,6 @@ class MainActivity : AppCompatActivity() {
                 else -> binding.add.show()
             }
         }
-
-        binding.add.setOnClickListener {
-            val intent = Intent(this, AddDeviceActivity::class.java)
-            startActivityForResult(intent, 1001)
-        }
     }
 
     override fun onStart() {
@@ -85,18 +77,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
-            val serial = data.getStringExtra("serial") ?: return
-            val model = data.getStringExtra("model") ?: return
-            val date = data.getStringExtra("date") ?: return
-            val state = data.getStringExtra("state") ?: return
-            val device = Device(serial, model, date, state)
-            deviceViewModel.addDevice(device)
         }
     }
 }
