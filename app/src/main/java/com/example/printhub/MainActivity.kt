@@ -57,6 +57,11 @@ class MainActivity : AppCompatActivity() {
                 else -> binding.add.show()
             }
         }
+
+        binding.add.setOnClickListener {
+            val intent = Intent(this, AddDeviceActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {
