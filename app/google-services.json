@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "586695458589",
+    "project_id": "diplom-ee84c",
+    "storage_bucket": "diplom-ee84c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586695458589:android:0c09edfa51171a9ca3ebf4",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfYtGuznfu7BuzE5fiOXuRPXVZ5mCmbig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586695458589:android:9512b07fd9b9d946a3ebf4",
+        "android_client_info": {
+          "package_name": "com.example.printhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfYtGuznfu7BuzE5fiOXuRPXVZ5mCmbig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
