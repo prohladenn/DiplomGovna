@@ -40,10 +40,15 @@ class FirstFragment : Fragment() {
             db.collection("users")
                 .document(user.uid)
                 .collection("devices")
-                .get()
-                .addOnSuccessListener { result ->
+                .addSnapshotListener { snapshot, error ->
                     progressBar.visibility = View.GONE
-                    val loadedDevices = result.documents.mapNotNull { it.toObject(Device::class.java) }
+                    if (error != null) {
+                        messageText.text = "Ошибка загрузки: ${'$'}{error.message}"
+                        messageText.visibility = View.VISIBLE
+                        recyclerView.visibility = View.GONE
+                        return@addSnapshotListener
+                    }
+                    val loadedDevices = snapshot?.documents?.mapNotNull { it.toObject(Device::class.java) } ?: emptyList()
                     adapter.updateData(loadedDevices)
                     if (loadedDevices.isEmpty()) {
                         messageText.text = "Устройств не найдено"
@@ -53,12 +58,6 @@ class FirstFragment : Fragment() {
                         messageText.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
                     }
-                }
-                .addOnFailureListener { e ->
-                    progressBar.visibility = View.GONE
-                    messageText.text = "Ошибка загрузки: ${e.localizedMessage}"
-                    messageText.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
                 }
         } else {
             messageText.text = "Пользователь не авторизован"
