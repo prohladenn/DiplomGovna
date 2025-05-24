@@ -6,7 +6,6 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.example.printhub.databinding.ActivityMainBinding
 import androidx.navigation.findNavController
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -16,13 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
         // Динамически добавляем заголовок
         val headerContainer = findViewById<FrameLayout>(R.id.header_container)
@@ -50,15 +45,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val addButton = findViewById<View>(R.id.add)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.SecondFragment -> binding.add.hide()
-                R.id.FirstFragment -> binding.add.show()
-                else -> binding.add.show()
+                R.id.SecondFragment -> addButton.visibility = View.GONE
+                R.id.FirstFragment, else -> addButton.visibility = View.VISIBLE
             }
         }
 
-        binding.add.setOnClickListener {
+        addButton.setOnClickListener {
             val intent = Intent(this, AddDeviceActivity::class.java)
             startActivity(intent)
         }
