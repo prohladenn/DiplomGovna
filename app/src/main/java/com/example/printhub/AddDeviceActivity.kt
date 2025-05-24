@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,7 +47,6 @@ class AddDeviceActivity : AppCompatActivity() {
             val name = editName.text.toString().trim()
             val lastServiceDate = editLastServiceDate.text.toString().trim()
             val status = editStatus.text.toString().trim()
-            // Пока что сохраняем только локально (например, в памяти или лог)
             val device = Device(
                 serialNumber = serialNumber,
                 name = name,
@@ -53,8 +54,23 @@ class AddDeviceActivity : AppCompatActivity() {
                 status = status,
                 history = emptyList()
             )
-            Toast.makeText(this, "Устройство добавлено!", Toast.LENGTH_SHORT).show()
-            finish()
+            val user = FirebaseAuth.getInstance().currentUser
+            if (user != null) {
+                val db = FirebaseFirestore.getInstance()
+                db.collection("users")
+                    .document(user.uid)
+                    .collection("devices")
+                    .add(device)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Устройство добавлено в Firebase!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Ошибка: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(this, "Пользователь не авторизован", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
