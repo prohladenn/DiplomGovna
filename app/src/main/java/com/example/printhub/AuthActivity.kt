@@ -42,7 +42,7 @@ class AuthActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Ошибка входа: ${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Введенна неверная почта или пароль", Toast.LENGTH_SHORT).show()
                     }
                 }
         }

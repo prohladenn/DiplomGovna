@@ -62,7 +62,7 @@ class AddDeviceActivity : AppCompatActivity() {
                     .collection("devices")
                     .add(device)
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Устройство добавлено в Firebase!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Устройство добавлено", Toast.LENGTH_SHORT).show()
                         finish()
                     }
                     .addOnFailureListener { e ->
