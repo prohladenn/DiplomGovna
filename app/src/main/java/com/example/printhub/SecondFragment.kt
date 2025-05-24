@@ -36,8 +36,9 @@ class SecondFragment : Fragment() {
 
         // Получаем количество устройств пользователя
         val db = FirebaseFirestore.getInstance()
-        db.collection("devices")
-            .whereEqualTo("userId", user.uid)
+        db.collection("users")
+            .document(user.uid)
+            .collection("devices")
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     tvDeviceCount.text = "Ошибка загрузки данных"
