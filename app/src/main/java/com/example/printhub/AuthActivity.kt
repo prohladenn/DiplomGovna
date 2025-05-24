@@ -17,7 +17,6 @@ class AuthActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Если пользователь уже авторизован — сразу в MainActivity
         if (auth.currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
@@ -42,7 +41,7 @@ class AuthActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Введенна неверная почта или пароль", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Ошибка входа: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -60,7 +59,7 @@ class AuthActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Ошибка регистрации: ${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Ошибка регистрации: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
         }

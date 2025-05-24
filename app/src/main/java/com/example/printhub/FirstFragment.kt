@@ -42,29 +42,25 @@ class FirstFragment : Fragment() {
             db.collection("users")
                 .document(user.uid)
                 .collection("devices")
-                .addSnapshotListener { snapshot, error ->
+                .get()
+                .addOnSuccessListener { result ->
+                    devices.clear()
+                    for (doc in result) {
+                        val device = doc.toObject(Device::class.java)
+                        devices.add(device)
+                    }
+                    adapter.updateData(devices)
                     progressBar.visibility = View.GONE
-                    if (error != null) {
-                        messageText.text = "Ошибка загрузки: ${'$'}{error.message}"
-                        messageText.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
-                        return@addSnapshotListener
-                    }
-                    val loadedDevices = snapshot?.documents?.mapNotNull { it.toObject(Device::class.java) } ?: emptyList()
-                    adapter.updateData(loadedDevices)
-                    if (loadedDevices.isEmpty()) {
-                        messageText.text = "Устройств не найдено"
-                        messageText.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
-                    } else {
-                        messageText.visibility = View.GONE
-                        recyclerView.visibility = View.VISIBLE
-                    }
+                    recyclerView.visibility = View.VISIBLE
+                }
+                .addOnFailureListener {
+                    progressBar.visibility = View.GONE
+                    messageText.visibility = View.VISIBLE
+                    messageText.text = "Ошибка загрузки устройств"
                 }
         } else {
-            messageText.text = "Пользователь не авторизован"
             messageText.visibility = View.VISIBLE
-            recyclerView.visibility = View.GONE
+            messageText.text = "Пользователь не авторизован"
         }
     }
 }
