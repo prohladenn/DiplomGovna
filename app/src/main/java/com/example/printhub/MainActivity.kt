@@ -12,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import androidx.lifecycle.ViewModelProvider
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +50,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.SecondFragment -> addButton.visibility = View.GONE
-                R.id.FirstFragment, else -> addButton.visibility = View.VISIBLE
+                R.id.FirstFragment -> addButton.visibility = View.VISIBLE
+                else -> addButton.visibility = View.VISIBLE
             }
         }
 
