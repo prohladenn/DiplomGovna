@@ -20,13 +20,14 @@ class AddDeviceActivity : AppCompatActivity() {
         // Кнопка "Назад"
         val backBtn = ImageButton(this).apply {
             setImageResource(R.drawable.ic_arrow_back_black_24)
-            setBackgroundColor(resources.getColor(android.R.color.white))
+            background = null // прозрачный фон
         }
+        // Кнопка будет совпадать по вертикали с заголовком
         val params = android.widget.FrameLayout.LayoutParams(
             android.widget.FrameLayout.LayoutParams.WRAP_CONTENT,
             android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
         )
-        params.topMargin = 16
+        params.topMargin = findViewById<TextView>(R.id.title_add_device).top // совпадает с заголовком
         params.leftMargin = 16
         backBtn.layoutParams = params
         val root = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.rootView)
