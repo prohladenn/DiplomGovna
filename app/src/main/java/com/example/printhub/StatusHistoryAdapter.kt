@@ -17,7 +17,20 @@ class StatusHistoryAdapter(private val history: List<String>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: StatusViewHolder, position: Int) {
-        holder.statusText.text = history[position]
+        // Отображаем историю в обратном порядке: последнее изменение сверху
+        val reversedIndex = history.size - 1 - position
+        val entry = history[reversedIndex]
+        // Жирная дата: выделяем до первого ':'
+        val colonIndex = entry.indexOf(":")
+        if (colonIndex > 0) {
+            val date = entry.substring(0, colonIndex)
+            val status = entry.substring(colonIndex)
+            val spannable = android.text.SpannableString(entry)
+            spannable.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, colonIndex, android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            holder.statusText.text = spannable
+        } else {
+            holder.statusText.text = entry
+        }
     }
 
     override fun getItemCount(): Int = history.size
