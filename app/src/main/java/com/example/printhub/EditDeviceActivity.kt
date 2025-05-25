@@ -134,21 +134,7 @@ class EditDeviceActivity : AppCompatActivity() {
                     }
             }
         }
-        // Кнопка "Назад"
-        val backBtn = ImageButton(this).apply {
-            setImageResource(R.drawable.ic_arrow_back_black_24)
-            background = null // прозрачный фон
-        }
-        // Кнопка будет совпадать по вертикали с заголовком
-        val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        params.topMargin = findViewById<TextView>(R.id.edit_device_title).top // совпадает с заголовком
-        params.leftMargin = 16
-        backBtn.layoutParams = params
-        val root = findViewById<LinearLayout>(R.id.edit_device_root)
-        root.addView(backBtn, 0)
-        backBtn.setOnClickListener { finish() }
+        // Кнопка "Назад" теперь в layout, обработчик:
+        findViewById<ImageButton>(R.id.back_button).setOnClickListener { finish() }
     }
 }
