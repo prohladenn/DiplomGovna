@@ -28,7 +28,12 @@ class FirstFragment : Fragment() {
         val progressBar = view.findViewById<View>(R.id.progress_bar)
         val messageText = view.findViewById<TextView>(R.id.message_text)
         val searchEditText = view.findViewById<android.widget.EditText>(R.id.search_edit_text)
-        adapter = DeviceAdapter(devices) { /* обработка клика */ }
+        adapter = DeviceAdapter(devices) { device ->
+            val intent = android.content.Intent(requireContext(), EditDeviceActivity::class.java)
+            intent.putExtra("deviceId", device.serialNumber)
+            intent.putExtra("userId", user?.uid)
+            startActivity(intent)
+        }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
