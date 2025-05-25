@@ -25,6 +25,7 @@
         </activity>
         <activity android:name="com.example.printhub.AuthActivity" />
         <activity android:name="com.example.printhub.AddDeviceActivity" />
+        <activity android:name="com.example.printhub.EditDeviceActivity" />
     </application>
 
 </manifest>
