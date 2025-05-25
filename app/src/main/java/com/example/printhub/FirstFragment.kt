@@ -30,6 +30,7 @@ class FirstFragment : Fragment() {
         adapter = DeviceAdapter(devices)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(VerticalSpaceItemDecoration(16))
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
