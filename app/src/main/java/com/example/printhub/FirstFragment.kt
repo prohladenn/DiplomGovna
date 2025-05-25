@@ -82,4 +82,37 @@ class FirstFragment : Fragment() {
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        val user = FirebaseAuth.getInstance().currentUser
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.printer_list)
+        val progressBar = view?.findViewById<View>(R.id.progress_bar)
+        val messageText = view?.findViewById<TextView>(R.id.message_text)
+        if (user != null && recyclerView != null && progressBar != null && messageText != null) {
+            progressBar.visibility = View.VISIBLE
+            messageText.visibility = View.GONE
+            recyclerView.visibility = View.GONE
+            val db = FirebaseFirestore.getInstance()
+            db.collection("users")
+                .document(user.uid)
+                .collection("devices")
+                .get()
+                .addOnSuccessListener { result ->
+                    devices.clear()
+                    for (doc in result) {
+                        val device = doc.toObject(Device::class.java)
+                        devices.add(device)
+                    }
+                    adapter.updateData(devices)
+                    progressBar.visibility = View.GONE
+                    recyclerView.visibility = View.VISIBLE
+                }
+                .addOnFailureListener {
+                    progressBar.visibility = View.GONE
+                    messageText.visibility = View.VISIBLE
+                    messageText.text = "Ошибка загрузки устройств"
+                }
+        }
+    }
 }
