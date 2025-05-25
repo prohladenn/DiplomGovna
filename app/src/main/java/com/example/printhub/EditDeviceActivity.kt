@@ -43,16 +43,19 @@ class EditDeviceActivity : AppCompatActivity() {
         dateEdit.setText(dateFormat.format(Date()))
 
         if (deviceId != null && userId != null) {
-            db.collection("users").document(userId!!).collection("devices").document(deviceId!!).get()
-                .addOnSuccessListener { doc ->
-                    if (doc.exists()) {
+            db.collection("users").document(userId!!)
+                .collection("devices")
+                .whereEqualTo("serialNumber", deviceId)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    val doc = querySnapshot.documents.firstOrNull()
+                    if (doc != null && doc.exists()) {
                         val name = doc.getString("name") ?: ""
                         val serialNumber = doc.getString("serialNumber") ?: ""
                         val status = doc.getString("status") ?: ""
                         modelText.text = name
                         serialText.text = serialNumber
-                        // В 53 строке: всегда устанавливаем текущую дату
-                        dateEdit.setText(dateFormat.format(Date()))
+                        dateEdit.setText(dateFormat.format(Date())) // всегда текущая дата
                         stateEdit.setText(status)
                         val historyList = (doc.get("history") as? List<Map<String, String>>)?.map { it["description"] ?: "" } ?: emptyList()
                         statusHistoryAdapter = StatusHistoryAdapter(historyList)
