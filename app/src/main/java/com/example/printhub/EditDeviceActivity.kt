@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,6 +16,8 @@ class EditDeviceActivity : AppCompatActivity() {
     private lateinit var dateEdit: EditText
     private lateinit var stateEdit: EditText
     private lateinit var saveChangesButton: Button
+    private lateinit var statusHistoryRecycler: RecyclerView
+    private lateinit var statusHistoryAdapter: StatusHistoryAdapter
     private var deviceId: String? = null
     private var userId: String? = null
     private val db = FirebaseFirestore.getInstance()
@@ -28,6 +32,9 @@ class EditDeviceActivity : AppCompatActivity() {
         dateEdit = findViewById(R.id.edit_date)
         stateEdit = findViewById(R.id.edit_state)
         saveChangesButton = findViewById(R.id.button_save_changes)
+        statusHistoryRecycler = findViewById(R.id.recycler_status_history)
+
+        statusHistoryRecycler.layoutManager = LinearLayoutManager(this)
 
         deviceId = intent.getStringExtra("deviceId")
         userId = intent.getStringExtra("userId")
@@ -40,10 +47,14 @@ class EditDeviceActivity : AppCompatActivity() {
                 .addOnSuccessListener { doc ->
                     val device = doc.toObject(Device::class.java)
                     if (device != null) {
-                        modelText.text = device.name
+                        modelText.text = device.model
                         serialText.text = device.serialNumber
                         // Не трогаем dateEdit, чтобы не перезаписать текущую дату
-                        stateEdit.setText(device.status)
+                        stateEdit.setText(device.state)
+                        // История статусов
+                        val historyList = device.history.map { it.description }
+                        statusHistoryAdapter = StatusHistoryAdapter(historyList)
+                        statusHistoryRecycler.adapter = statusHistoryAdapter
                     }
                 }
         }

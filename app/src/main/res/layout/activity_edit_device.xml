@@ -73,6 +73,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="История статусов"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_status_history"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Состояние"
             android:textColor="@color/black"/>
 
@@ -91,6 +106,7 @@
             android:text="Сохранить изменения"
             android:textColor="@color/black"
             android:backgroundTint="@color/green_accent"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:layout_gravity="bottom"/>
     </LinearLayout>
 </LinearLayout>
