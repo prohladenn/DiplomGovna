@@ -40,10 +40,10 @@ class EditDeviceActivity : AppCompatActivity() {
                 .addOnSuccessListener { doc ->
                     val device = doc.toObject(Device::class.java)
                     if (device != null) {
-                        modelText.text = device.model
+                        modelText.text = device.name
                         serialText.text = device.serialNumber
                         // Не трогаем dateEdit, чтобы не перезаписать текущую дату
-                        stateEdit.setText(device.state)
+                        stateEdit.setText(device.status)
                     }
                 }
         }
