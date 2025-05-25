@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +16,22 @@ class AddDeviceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_device)
+
+        // Кнопка "Назад"
+        val backBtn = ImageButton(this).apply {
+            setImageResource(R.drawable.ic_arrow_back_black_24)
+            setBackgroundColor(resources.getColor(android.R.color.white))
+        }
+        val params = android.widget.FrameLayout.LayoutParams(
+            android.widget.FrameLayout.LayoutParams.WRAP_CONTENT,
+            android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.topMargin = 16
+        params.leftMargin = 16
+        backBtn.layoutParams = params
+        val root = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.rootView)
+        root.addView(backBtn)
+        backBtn.setOnClickListener { finish() }
 
         val editSerialNumber = findViewById<EditText>(R.id.edit_serial_number)
         val editName = findViewById<EditText>(R.id.edit_name)

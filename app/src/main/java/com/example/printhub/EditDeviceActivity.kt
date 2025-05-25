@@ -134,5 +134,20 @@ class EditDeviceActivity : AppCompatActivity() {
                     }
             }
         }
+        // Кнопка "Назад"
+        val backBtn = ImageButton(this).apply {
+            setImageResource(R.drawable.ic_arrow_back_black_24)
+            setBackgroundColor(resources.getColor(android.R.color.white))
+        }
+        val params = android.widget.FrameLayout.LayoutParams(
+            android.widget.FrameLayout.LayoutParams.WRAP_CONTENT,
+            android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.topMargin = 16
+        params.leftMargin = 16
+        backBtn.layoutParams = params
+        val root = findViewById<LinearLayout>(R.id.edit_device_root)
+        root.addView(backBtn, 0)
+        backBtn.setOnClickListener { finish() }
     }
 }
