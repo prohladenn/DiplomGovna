@@ -77,11 +77,23 @@ class EditDeviceActivity : AppCompatActivity() {
             val newDate = dateEdit.text.toString()
             val newState = stateEdit.text.toString()
             if (deviceId != null && userId != null) {
-                db.collection("users").document(userId!!).collection("devices").document(deviceId!!)
-                    .update(mapOf(
-                        "lastServiceDate" to newDate,
-                        "state" to newState
-                    )).addOnSuccessListener { finish() }
+                db.collection("users").document(userId!!)
+                    .collection("devices")
+                    .whereEqualTo("serialNumber", deviceId)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        val doc = querySnapshot.documents.firstOrNull()
+                        if (doc != null && doc.exists()) {
+                            doc.reference.update(
+                                mapOf(
+                                    "lastServiceDate" to newDate,
+                                    "status" to newState
+                                )
+                            ).addOnSuccessListener { finish() }
+                        } else {
+                            Toast.makeText(this, "Устройство не найдено", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
     }
