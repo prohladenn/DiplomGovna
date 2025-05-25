@@ -143,7 +143,7 @@ class EditDeviceActivity : AppCompatActivity() {
 
             // Цвета из палитры приложения
             dialog.setOnShowListener {
-                dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(resources.getColor(R.color.holo_red_dark, theme))
+                dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(resources.getColor(android.R.color.holo_red_dark, theme))
                 dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(resources.getColor(R.color.green_accent, theme))
             }
             dialog.show()
