@@ -118,21 +118,35 @@ class EditDeviceActivity : AppCompatActivity() {
         val layout = findViewById<LinearLayout>(R.id.edit_device_root)
         layout.addView(deleteButton)
         deleteButton.setOnClickListener {
-            if (deviceId != null && userId != null) {
-                db.collection("users").document(userId!!)
-                    .collection("devices")
-                    .whereEqualTo("serialNumber", deviceId)
-                    .get()
-                    .addOnSuccessListener { querySnapshot ->
-                        val doc = querySnapshot.documents.firstOrNull()
-                        if (doc != null && doc.exists()) {
-                            doc.reference.delete().addOnSuccessListener {
-                                Toast.makeText(this, "Устройство удалено", Toast.LENGTH_SHORT).show()
-                                finish()
+            val dialog = android.app.AlertDialog.Builder(this)
+                .setTitle("Удалить устройство?")
+                .setMessage("Вы уверены, что хотите удалить устройство? Восстановить данные будет невозможно.")
+                .setPositiveButton("Удалить") { _, _ ->
+                    if (deviceId != null && userId != null) {
+                        db.collection("users").document(userId!!)
+                            .collection("devices")
+                            .whereEqualTo("serialNumber", deviceId)
+                            .get()
+                            .addOnSuccessListener { querySnapshot ->
+                                val doc = querySnapshot.documents.firstOrNull()
+                                if (doc != null && doc.exists()) {
+                                    doc.reference.delete().addOnSuccessListener {
+                                        Toast.makeText(this, "Устройство удалено", Toast.LENGTH_SHORT).show()
+                                        finish()
+                                    }
+                                }
                             }
-                        }
                     }
+                }
+                .setNegativeButton("Отмена", null)
+                .create()
+
+            // Цвета из палитры приложения
+            dialog.setOnShowListener {
+                dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(resources.getColor(R.color.holo_red_dark, theme))
+                dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(resources.getColor(R.color.green_accent, theme))
             }
+            dialog.show()
         }
         // Кнопка "Назад" теперь в layout, обработчик:
         findViewById<ImageButton>(R.id.back_button).setOnClickListener { finish() }
