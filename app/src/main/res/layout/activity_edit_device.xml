@@ -3,62 +3,91 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="0dp"
+    android:background="@color/green_accent">
 
     <TextView
-        android:id="@+id/label_model"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Модель устройства"/>
-
-    <TextView
-        android:id="@+id/text_model"
+        android:id="@+id/edit_device_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Редактирование устройства"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:paddingBottom="12dp"/>
+        android:textSize="20sp"
+        android:gravity="center"
+        android:background="@color/green_accent"
+        android:padding="20dp" />
 
-    <TextView
-        android:id="@+id/label_serial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Серийный номер"/>
-
-    <TextView
-        android:id="@+id/text_serial"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:paddingBottom="12dp"/>
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="24dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Дата последнего обслуживания"/>
+        <TextView
+            android:id="@+id/label_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Модель устройства"
+            android:textColor="@color/black"/>
 
-    <EditText
-        android:id="@+id/edit_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:inputType="none"
-        android:paddingBottom="12dp"/>
+        <TextView
+            android:id="@+id/text_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingBottom="12dp"
+            android:textColor="@color/black"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Состояние"/>
+        <TextView
+            android:id="@+id/label_serial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Серийный номер"
+            android:textColor="@color/black"/>
 
-    <Spinner
-        android:id="@+id/spinner_state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="24dp"/>
+        <TextView
+            android:id="@+id/text_serial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingBottom="12dp"
+            android:textColor="@color/black"/>
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Сохранить"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Дата последнего обслуживания"
+            android:textColor="@color/black"/>
 
+        <EditText
+            android:id="@+id/edit_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="none"
+            android:paddingBottom="12dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Состояние"
+            android:textColor="@color/black"/>
+
+        <Spinner
+            android:id="@+id/spinner_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"/>
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/green_accent"/>
+    </LinearLayout>
 </LinearLayout>
