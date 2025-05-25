@@ -32,6 +32,9 @@ class EditDeviceActivity : AppCompatActivity() {
         deviceId = intent.getStringExtra("deviceId")
         userId = intent.getStringExtra("userId")
 
+        // Устанавливаем текущую дату при каждом открытии экрана
+        dateEdit.setText(dateFormat.format(Date()))
+
         if (deviceId != null && userId != null) {
             db.collection("users").document(userId!!).collection("devices").document(deviceId!!).get()
                 .addOnSuccessListener { doc ->
@@ -39,14 +42,10 @@ class EditDeviceActivity : AppCompatActivity() {
                     if (device != null) {
                         modelText.text = device.model
                         serialText.text = device.serialNumber
-                        // Всегда ставим текущую дату
-                        dateEdit.setText(dateFormat.format(Date()))
+                        // Не трогаем dateEdit, чтобы не перезаписать текущую дату
                         stateEdit.setText(device.state)
                     }
                 }
-        } else {
-            // Если нет deviceId — всегда ставим текущую дату
-            dateEdit.setText(dateFormat.format(Date()))
         }
 
         dateEdit.setOnClickListener {
