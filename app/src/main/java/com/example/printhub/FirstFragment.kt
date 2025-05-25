@@ -67,4 +67,25 @@ class FirstFragment : Fragment() {
             messageText.text = "Пользователь не авторизован"
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        // Обновляем список устройств при возврате на экран
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("users")
+                .document(user.uid)
+                .collection("devices")
+                .get()
+                .addOnSuccessListener { result ->
+                    devices.clear()
+                    for (doc in result) {
+                        val device = doc.toObject(Device::class.java)
+                        devices.add(device)
+                    }
+                    adapter.updateData(devices)
+                }
+        }
+    }
 }
