@@ -57,7 +57,9 @@ class EditDeviceActivity : AppCompatActivity() {
                         serialText.text = serialNumber
                         dateEdit.setText(dateFormat.format(Date())) // всегда текущая дата
                         stateEdit.setText(status)
-                        val historyList = (doc.get("history") as? List<Map<String, String>>)?.map { it["description"] ?: "" } ?: emptyList()
+                        val historyList = (doc.get("history") as? List<Map<String, String>>)?.map {
+                            it["description"] ?: ""
+                        } ?: emptyList()
                         statusHistoryAdapter = StatusHistoryAdapter(historyList)
                         statusHistoryRecycler.adapter = statusHistoryAdapter
                     }
@@ -85,12 +87,13 @@ class EditDeviceActivity : AppCompatActivity() {
                         val doc = querySnapshot.documents.firstOrNull()
                         if (doc != null && doc.exists()) {
                             // Получаем старую историю
-                            val oldHistory = (doc.get("history") as? List<Map<String, String>>)?.map {
-                                DeviceHistoryRecord(
-                                    date = it["date"] ?: "",
-                                    description = it["description"] ?: ""
-                                )
-                            } ?: emptyList()
+                            val oldHistory =
+                                (doc.get("history") as? List<Map<String, String>>)?.map {
+                                    DeviceHistoryRecord(
+                                        date = it["date"] ?: "",
+                                        description = it["description"] ?: ""
+                                    )
+                                } ?: emptyList()
                             val now = dateFormat.format(Date())
                             val newHistory = oldHistory + DeviceHistoryRecord(
                                 date = now,
@@ -100,7 +103,12 @@ class EditDeviceActivity : AppCompatActivity() {
                                 mapOf(
                                     "lastServiceDate" to newDate,
                                     "status" to newState,
-                                    "history" to newHistory.map { mapOf("date" to it.date, "description" to it.description) }
+                                    "history" to newHistory.map {
+                                        mapOf(
+                                            "date" to it.date,
+                                            "description" to it.description
+                                        )
+                                    }
                                 )
                             ).addOnSuccessListener { finish() }
                         } else {
@@ -109,14 +117,13 @@ class EditDeviceActivity : AppCompatActivity() {
                     }
             }
         }
-        val deleteButton = Button(this).apply {
+        /*val deleteButton = Button(this).apply {
             text = "Удалить устройство"
             setTextColor(resources.getColor(android.R.color.white))
             setBackgroundColor(resources.getColor(android.R.color.holo_red_dark))
             textSize = 16f
-        }
-        val layout = findViewById<LinearLayout>(R.id.edit_device_root)
-        layout.addView(deleteButton)
+        }*/
+        val deleteButton = findViewById<Button>(R.id.button_delete_devise)
         deleteButton.setOnClickListener {
             val dialog = android.app.AlertDialog.Builder(this)
                 .setTitle("Удалить устройство?")
@@ -131,7 +138,11 @@ class EditDeviceActivity : AppCompatActivity() {
                                 val doc = querySnapshot.documents.firstOrNull()
                                 if (doc != null && doc.exists()) {
                                     doc.reference.delete().addOnSuccessListener {
-                                        Toast.makeText(this, "Устройство удалено", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            this,
+                                            "Устройство удалено",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                         finish()
                                     }
                                 }
@@ -143,8 +154,10 @@ class EditDeviceActivity : AppCompatActivity() {
 
             // Цвета из палитры приложения
             dialog.setOnShowListener {
-                dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(resources.getColor(android.R.color.holo_red_dark, theme))
-                dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(resources.getColor(R.color.green_accent, theme))
+                dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
+                    ?.setTextColor(resources.getColor(android.R.color.holo_red_dark, theme))
+                dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)
+                    ?.setTextColor(resources.getColor(R.color.green_accent, theme))
             }
             dialog.show()
         }

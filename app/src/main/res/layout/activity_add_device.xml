@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/header_add_device"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/green_accent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,125 +21,98 @@
         <ImageButton
             android:id="@+id/back_button"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_arrow_back_black_24"
             android:contentDescription="Назад"
-            android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+
+            android:src="@drawable/ic_arrow_back_black_24" />
 
         <TextView
             android:id="@+id/title_add_device"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Добавление устройства"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
             android:gravity="center"
             android:padding="16dp"
-            app:layout_constraintStart_toEndOf="@id/back_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="Добавление устройства"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/label_serial_number"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/container_add_device"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Серийный номер*"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/header_add_device"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <EditText
-        android:id="@+id/edit_serial_number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Введите серийный номер"
-        app:layout_constraintTop_toBottomOf="@id/label_serial_number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/label_serial_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Серийный номер*"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/label_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Модель"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/edit_serial_number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/edit_serial_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите серийный номер" />
 
-    <EditText
-        android:id="@+id/edit_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Введите модель"
-        app:layout_constraintTop_toBottomOf="@id/label_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Модель"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/label_last_service_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Дата последнего обслуживания"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/edit_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите модель" />
 
-    <EditText
-        android:id="@+id/edit_last_service_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Выберите дату"
-        android:focusable="false"
-        app:layout_constraintTop_toBottomOf="@id/label_last_service_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/label_last_service_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Дата последнего обслуживания"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/label_status"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Статус устройства"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/edit_last_service_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/edit_last_service_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Выберите дату" />
 
-    <EditText
-        android:id="@+id/edit_status"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Введите статус"
-        app:layout_constraintTop_toBottomOf="@id/label_status"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/label_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Статус устройства"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btn_save_device"
-        android:textColor="@android:color/black"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Сохранить"
-        android:backgroundTint="@color/green_accent"
-        app:layout_constraintTop_toBottomOf="@id/edit_status"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        <EditText
+            android:id="@+id/edit_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите статус" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_save_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/green_accent"
+            android:text="Сохранить"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+</LinearLayout>
