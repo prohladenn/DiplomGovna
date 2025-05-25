@@ -27,22 +27,17 @@ class FirstFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.printer_list)
         val progressBar = view.findViewById<View>(R.id.progress_bar)
         val messageText = view.findViewById<TextView>(R.id.message_text)
-        val user = FirebaseAuth.getInstance().currentUser
-        adapter = DeviceAdapter(devices) { device ->
-            // Открыть EditDeviceActivity для просмотра/редактирования устройства
-            val intent = android.content.Intent(requireContext(), EditDeviceActivity::class.java)
-            intent.putExtra("deviceId", device.serialNumber)
-            intent.putExtra("userId", user?.uid)
-            startActivity(intent)
-        }
+        val searchEditText = view.findViewById<android.widget.EditText>(R.id.search_edit_text)
+        adapter = DeviceAdapter(devices) { /* обработка клика */ }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
+        val user = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
         if (user != null) {
             progressBar.visibility = View.VISIBLE
             messageText.visibility = View.GONE
             recyclerView.visibility = View.GONE
-            val db = FirebaseFirestore.getInstance()
+            val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
             db.collection("users")
                 .document(user.uid)
                 .collection("devices")
@@ -66,26 +61,20 @@ class FirstFragment : Fragment() {
             messageText.visibility = View.VISIBLE
             messageText.text = "Пользователь не авторизован"
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        // Обновляем список устройств при возврате на экран
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val db = FirebaseFirestore.getInstance()
-            db.collection("users")
-                .document(user.uid)
-                .collection("devices")
-                .get()
-                .addOnSuccessListener { result ->
-                    devices.clear()
-                    for (doc in result) {
-                        val device = doc.toObject(Device::class.java)
-                        devices.add(device)
-                    }
+        // Поиск по серийному номеру
+        searchEditText.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString().trim()
+                if (query.isEmpty()) {
                     adapter.updateData(devices)
+                } else {
+                    val filtered = devices.filter { it.serialNumber.contains(query, ignoreCase = true) }
+                    adapter.updateData(filtered)
                 }
-        }
+            }
+            override fun afterTextChanged(s: android.text.Editable?) {}
+        })
     }
 }
