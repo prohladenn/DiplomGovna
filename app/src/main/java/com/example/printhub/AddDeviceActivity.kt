@@ -22,20 +22,41 @@ class AddDeviceActivity : AppCompatActivity() {
         val editStatus = findViewById<EditText>(R.id.edit_status)
         val btnSave = findViewById<Button>(R.id.btn_save_device)
 
-        // Установить текущую дату по умолчанию
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val calendar = Calendar.getInstance()
-        editLastServiceDate.setText(dateFormat.format(calendar.time))
+        val deviceId = intent.getStringExtra("deviceId")
+        val userId = intent.getStringExtra("userId")
 
-        // Открыть DatePickerDialog при клике на поле даты
-        editLastServiceDate.setOnClickListener {
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-            DatePickerDialog(this, { _, y, m, d ->
-                calendar.set(y, m, d)
-                editLastServiceDate.setText(dateFormat.format(calendar.time))
-            }, year, month, day).show()
+        if (deviceId != null && userId != null) {
+            // Загрузка данных устройства из Firestore
+            val db = FirebaseFirestore.getInstance()
+            db.collection("users").document(userId).collection("devices").document(deviceId).get()
+                .addOnSuccessListener { doc ->
+                    val device = doc.toObject(Device::class.java)
+                    if (device != null) {
+                        editSerialNumber.setText(device.serialNumber)
+                        editName.setText(device.name)
+                        editLastServiceDate.setText(device.lastServiceDate)
+                        editStatus.setText(device.status)
+                        // Можно сделать поля серийного номера и имени неактивными для редактирования
+                        editSerialNumber.isEnabled = false
+                        editName.isEnabled = false
+                    }
+                }
+        } else {
+            // Установить текущую дату по умолчанию
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val calendar = Calendar.getInstance()
+            editLastServiceDate.setText(dateFormat.format(calendar.time))
+
+            // Открыть DatePickerDialog при клике на поле даты
+            editLastServiceDate.setOnClickListener {
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                DatePickerDialog(this, { _, y, m, d ->
+                    calendar.set(y, m, d)
+                    editLastServiceDate.setText(dateFormat.format(calendar.time))
+                }, year, month, day).show()
+            }
         }
 
         btnSave.setOnClickListener {

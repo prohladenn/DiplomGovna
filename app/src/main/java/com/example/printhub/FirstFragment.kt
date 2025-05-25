@@ -29,8 +29,8 @@ class FirstFragment : Fragment() {
         val messageText = view.findViewById<TextView>(R.id.message_text)
         val user = FirebaseAuth.getInstance().currentUser
         adapter = DeviceAdapter(devices) { device ->
-            // Открыть EditDeviceActivity
-            val intent = android.content.Intent(requireContext(), EditDeviceActivity::class.java)
+            // Открыть AddDeviceActivity для просмотра/редактирования устройства
+            val intent = android.content.Intent(requireContext(), AddDeviceActivity::class.java)
             intent.putExtra("deviceId", device.serialNumber)
             intent.putExtra("userId", user?.uid)
             startActivity(intent)
