@@ -12,8 +12,8 @@ class EditDeviceActivity : AppCompatActivity() {
     private lateinit var modelText: TextView
     private lateinit var serialText: TextView
     private lateinit var dateEdit: EditText
-    private lateinit var stateSpinner: Spinner
-    private lateinit var saveButton: Button
+    private lateinit var stateEdit: EditText
+    private lateinit var saveChangesButton: Button
     private var deviceId: String? = null
     private var userId: String? = null
     private val db = FirebaseFirestore.getInstance()
@@ -26,11 +26,8 @@ class EditDeviceActivity : AppCompatActivity() {
         modelText = findViewById(R.id.text_model)
         serialText = findViewById(R.id.text_serial)
         dateEdit = findViewById(R.id.edit_date)
-        stateSpinner = findViewById(R.id.spinner_state)
-        saveButton = findViewById(R.id.button_save)
-
-        val states = resources.getStringArray(R.array.device_states)
-        stateSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, states)
+        stateEdit = findViewById(R.id.edit_state)
+        saveChangesButton = findViewById(R.id.button_save_changes)
 
         deviceId = intent.getStringExtra("deviceId")
         userId = intent.getStringExtra("userId")
@@ -43,8 +40,7 @@ class EditDeviceActivity : AppCompatActivity() {
                         modelText.text = device.model
                         serialText.text = device.serialNumber
                         dateEdit.setText(device.lastServiceDate ?: dateFormat.format(Date()))
-                        val stateIndex = states.indexOf(device.state)
-                        if (stateIndex >= 0) stateSpinner.setSelection(stateIndex)
+                        stateEdit.setText(device.state)
                     }
                 }
         }
@@ -58,9 +54,9 @@ class EditDeviceActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        saveButton.setOnClickListener {
+        saveChangesButton.setOnClickListener {
             val newDate = dateEdit.text.toString()
-            val newState = stateSpinner.selectedItem.toString()
+            val newState = stateEdit.text.toString()
             if (deviceId != null && userId != null) {
                 db.collection("users").document(userId!!).collection("devices").document(deviceId!!)
                     .update(mapOf(

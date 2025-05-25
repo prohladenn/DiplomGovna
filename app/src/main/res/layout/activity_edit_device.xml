@@ -76,18 +76,21 @@
             android:text="Состояние"
             android:textColor="@color/black"/>
 
-        <Spinner
-            android:id="@+id/spinner_state"
+        <EditText
+            android:id="@+id/edit_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="24dp"/>
+            android:hint="Введите статус"
+            android:paddingBottom="24dp"
+            android:textColor="@color/black"/>
 
         <Button
-            android:id="@+id/button_save"
+            android:id="@+id/button_save_changes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Сохранить"
+            android:text="Сохранить изменения"
             android:textColor="@color/black"
-            android:backgroundTint="@color/green_accent"/>
+            android:backgroundTint="@color/green_accent"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 </LinearLayout>
