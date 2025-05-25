@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.printhub.VerticalSpaceItemDecoration
 
 class FirstFragment : Fragment() {
     private lateinit var adapter: DeviceAdapter
