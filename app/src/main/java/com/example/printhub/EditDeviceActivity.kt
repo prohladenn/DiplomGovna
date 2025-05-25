@@ -39,10 +39,14 @@ class EditDeviceActivity : AppCompatActivity() {
                     if (device != null) {
                         modelText.text = device.model
                         serialText.text = device.serialNumber
-                        dateEdit.setText(device.lastServiceDate ?: dateFormat.format(Date()))
+                        // Всегда ставим текущую дату
+                        dateEdit.setText(dateFormat.format(Date()))
                         stateEdit.setText(device.state)
                     }
                 }
+        } else {
+            // Если нет deviceId — всегда ставим текущую дату
+            dateEdit.setText(dateFormat.format(Date()))
         }
 
         dateEdit.setOnClickListener {

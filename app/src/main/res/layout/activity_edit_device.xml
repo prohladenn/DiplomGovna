@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Дата последнего обслуживания"
+            android:text="Дата обслуживания"
             android:textColor="@color/black"/>
 
         <EditText
