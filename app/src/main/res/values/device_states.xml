@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="device_states">
+        <item>Работает</item>
+        <item>Требует обслуживания</item>
+        <item>Неисправен</item>
+        <item>Списан</item>
+    </string-array>
+</resources>

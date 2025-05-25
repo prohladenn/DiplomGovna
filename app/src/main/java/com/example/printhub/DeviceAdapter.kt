@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DeviceAdapter(private var devices: List<Device>) : RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
+class DeviceAdapter(private var devices: List<Device>, private val onItemClick: (Device) -> Unit) : RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
     class DeviceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val modelText: TextView = itemView.findViewById(R.id.device_model)
         val serialText: TextView = itemView.findViewById(R.id.device_serial)
@@ -21,6 +21,7 @@ class DeviceAdapter(private var devices: List<Device>) : RecyclerView.Adapter<De
         val device = devices[position]
         holder.modelText.text = device.name
         holder.serialText.text = device.serialNumber
+        holder.itemView.setOnClickListener { onItemClick(device) }
     }
 
     override fun getItemCount(): Int = devices.size

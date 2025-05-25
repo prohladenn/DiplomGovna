@@ -27,11 +27,17 @@ class FirstFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.printer_list)
         val progressBar = view.findViewById<View>(R.id.progress_bar)
         val messageText = view.findViewById<TextView>(R.id.message_text)
-        adapter = DeviceAdapter(devices)
+        val user = FirebaseAuth.getInstance().currentUser
+        adapter = DeviceAdapter(devices) { device ->
+            // Открыть EditDeviceActivity
+            val intent = android.content.Intent(requireContext(), EditDeviceActivity::class.java)
+            intent.putExtra("deviceId", device.serialNumber)
+            intent.putExtra("userId", user?.uid)
+            startActivity(intent)
+        }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             progressBar.visibility = View.VISIBLE
             messageText.visibility = View.GONE
