@@ -23,9 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.printhub.ProfileActivity"
-            android:exported="false" />
         <activity android:name="com.example.printhub.AuthActivity" />
         <activity android:name="com.example.printhub.AddDeviceActivity" />
     </application>

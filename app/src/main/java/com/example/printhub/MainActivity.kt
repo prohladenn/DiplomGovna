@@ -10,6 +10,8 @@ import androidx.navigation.findNavController
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.ViewModelProvider
 import android.view.View
 
 class MainActivity : AppCompatActivity() {
@@ -69,8 +71,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+        // Меню не используется
+        return false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

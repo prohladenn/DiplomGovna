@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.printhub.VerticalSpaceItemDecoration
 
 class FirstFragment : Fragment() {
     private lateinit var adapter: DeviceAdapter
@@ -31,7 +30,6 @@ class FirstFragment : Fragment() {
         adapter = DeviceAdapter(devices)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(VerticalSpaceItemDecoration(16))
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
