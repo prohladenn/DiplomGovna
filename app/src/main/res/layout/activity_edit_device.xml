@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="0dp"
     android:background="@color/green_accent">
@@ -20,7 +20,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:background="@android:color/white"
         android:padding="24dp">
@@ -73,21 +74,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="История статусов"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:paddingBottom="8dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_status_history"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginBottom="12dp"
-            android:background="@android:color/white"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Состояние"
             android:textColor="@color/black"/>
 
@@ -99,14 +85,29 @@
             android:paddingBottom="24dp"
             android:textColor="@color/black"/>
 
-        <Button
-            android:id="@+id/button_save_changes"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сохранить изменения"
+            android:text="История изменений"
             android:textColor="@color/black"
-            android:backgroundTint="@color/green_accent"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="bottom"/>
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_status_history"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/white"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_save_changes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить изменения"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/green_accent"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom"/>
 </LinearLayout>
