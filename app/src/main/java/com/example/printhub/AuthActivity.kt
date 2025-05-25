@@ -32,7 +32,7 @@ class AuthActivity : AppCompatActivity() {
             val email = emailEdit.text.toString().trim()
             val password = passwordEdit.text.toString().trim()
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Введите email и пароль", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Введите e-mail и пароль", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             auth.signInWithEmailAndPassword(email, password)
@@ -41,7 +41,7 @@ class AuthActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Ошибка входа: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Неверный e-mail или пароль", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -50,7 +50,7 @@ class AuthActivity : AppCompatActivity() {
             val email = emailEdit.text.toString().trim()
             val password = passwordEdit.text.toString().trim()
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Введите email и пароль", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Введите e-mail и пароль", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             auth.createUserWithEmailAndPassword(email, password)
@@ -59,7 +59,7 @@ class AuthActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Ошибка регистрации: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Ошибка регистрации: попробуйте другой e-mail или пароль", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
