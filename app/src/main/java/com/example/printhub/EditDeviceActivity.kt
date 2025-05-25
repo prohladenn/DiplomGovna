@@ -84,10 +84,23 @@ class EditDeviceActivity : AppCompatActivity() {
                     .addOnSuccessListener { querySnapshot ->
                         val doc = querySnapshot.documents.firstOrNull()
                         if (doc != null && doc.exists()) {
+                            // Получаем старую историю
+                            val oldHistory = (doc.get("history") as? List<Map<String, String>>)?.map {
+                                DeviceHistoryRecord(
+                                    date = it["date"] ?: "",
+                                    description = it["description"] ?: ""
+                                )
+                            } ?: emptyList()
+                            val now = dateFormat.format(Date())
+                            val newHistory = oldHistory + DeviceHistoryRecord(
+                                date = now,
+                                description = "$now: $newState"
+                            )
                             doc.reference.update(
                                 mapOf(
                                     "lastServiceDate" to newDate,
-                                    "status" to newState
+                                    "status" to newState,
+                                    "history" to newHistory.map { mapOf("date" to it.date, "description" to it.description) }
                                 )
                             ).addOnSuccessListener { finish() }
                         } else {

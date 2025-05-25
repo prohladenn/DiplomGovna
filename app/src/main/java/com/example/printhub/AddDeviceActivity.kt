@@ -68,12 +68,18 @@ class AddDeviceActivity : AppCompatActivity() {
             val name = editName.text.toString().trim()
             val lastServiceDate = editLastServiceDate.text.toString().trim()
             val status = editStatus.text.toString().trim()
+            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            val now = dateFormat.format(Date())
+            val historyRecord = DeviceHistoryRecord(
+                date = now,
+                description = "$now: $status"
+            )
             val device = Device(
                 serialNumber = serialNumber,
                 name = name,
                 lastServiceDate = lastServiceDate,
                 status = status,
-                history = emptyList()
+                history = listOf(historyRecord)
             )
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
