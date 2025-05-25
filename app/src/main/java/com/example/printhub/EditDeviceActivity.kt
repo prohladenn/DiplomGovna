@@ -109,5 +109,30 @@ class EditDeviceActivity : AppCompatActivity() {
                     }
             }
         }
+        val deleteButton = Button(this).apply {
+            text = "Удалить устройство"
+            setTextColor(resources.getColor(android.R.color.white))
+            setBackgroundColor(resources.getColor(android.R.color.holo_red_dark))
+            textSize = 16f
+        }
+        val layout = findViewById<LinearLayout>(R.id.edit_device_root)
+        layout.addView(deleteButton)
+        deleteButton.setOnClickListener {
+            if (deviceId != null && userId != null) {
+                db.collection("users").document(userId!!)
+                    .collection("devices")
+                    .whereEqualTo("serialNumber", deviceId)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        val doc = querySnapshot.documents.firstOrNull()
+                        if (doc != null && doc.exists()) {
+                            doc.reference.delete().addOnSuccessListener {
+                                Toast.makeText(this, "Устройство удалено", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        }
+                    }
+            }
+        }
     }
 }
