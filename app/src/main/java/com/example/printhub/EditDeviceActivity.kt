@@ -45,14 +45,16 @@ class EditDeviceActivity : AppCompatActivity() {
         if (deviceId != null && userId != null) {
             db.collection("users").document(userId!!).collection("devices").document(deviceId!!).get()
                 .addOnSuccessListener { doc ->
-                    val device = doc.toObject(Device::class.java)
-                    if (device != null) {
-                        modelText.text = device.model
-                        serialText.text = device.serialNumber
-                        // Не трогаем dateEdit, чтобы не перезаписать текущую дату
-                        stateEdit.setText(device.state)
-                        // История статусов
-                        val historyList = device.history.map { it.description }
+                    if (doc.exists()) {
+                        val name = doc.getString("name") ?: ""
+                        val serialNumber = doc.getString("serialNumber") ?: ""
+                        val status = doc.getString("status") ?: ""
+                        modelText.text = name
+                        serialText.text = serialNumber
+                        // В 53 строке: всегда устанавливаем текущую дату
+                        dateEdit.setText(dateFormat.format(Date()))
+                        stateEdit.setText(status)
+                        val historyList = (doc.get("history") as? List<Map<String, String>>)?.map { it["description"] ?: "" } ?: emptyList()
                         statusHistoryAdapter = StatusHistoryAdapter(historyList)
                         statusHistoryRecycler.adapter = statusHistoryAdapter
                     }
