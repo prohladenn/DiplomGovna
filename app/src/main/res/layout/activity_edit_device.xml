@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/green_accent"
-        android:padding="0dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:gravity="center_vertical">
 
         <ImageButton
