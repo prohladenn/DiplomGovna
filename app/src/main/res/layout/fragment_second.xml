@@ -17,7 +17,7 @@
             android:id="@+id/tvDeviceCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="У вас 0 устройств"
+            android:text="Ваши устройства: 0"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"

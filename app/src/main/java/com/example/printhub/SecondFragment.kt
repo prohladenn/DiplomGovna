@@ -41,7 +41,7 @@ class SecondFragment : Fragment() {
                     return@addSnapshotListener
                 }
                 val count = snapshot?.size() ?: 0
-                tvDeviceCount.text = "У вас $count устройств"
+                tvDeviceCount.text = "Ваши устройства: $count"
             }
 
         btnLogout.setOnClickListener {
