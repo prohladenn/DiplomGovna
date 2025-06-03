@@ -21,6 +21,7 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val tvUserEmail = view.findViewById<TextView>(R.id.tvUserEmail)
         val tvDeviceCount = view.findViewById<TextView>(R.id.tvDeviceCount)
         val btnLogout = view.findViewById<Button>(R.id.btnLogout)
 
@@ -30,6 +31,9 @@ class SecondFragment : Fragment() {
             requireActivity().finish()
             return
         }
+
+        // Отображение почты пользователя
+        tvUserEmail.text = user.email ?: "Почта не найдена"
 
         val db = FirebaseFirestore.getInstance()
         db.collection("users")
