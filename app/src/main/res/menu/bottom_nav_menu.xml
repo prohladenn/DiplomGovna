@@ -2,8 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_list"
-        android:title="Список объектов" />
+        android:title="Список объектов"
+        android:textColor="@color/black"/>
     <item
         android:id="@+id/navigation_profile"
-        android:title="Личный кабинет" />
+        android:title="Личный кабинет"
+        android:textColor="@color/black"/>
 </menu>
